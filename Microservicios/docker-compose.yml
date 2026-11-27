@@ -1,0 +1,46 @@
+services:
+  users-api:
+    build: ./users-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_PATH=/data/users.db
+    volumes:
+      - users_data:/data
+    restart: unless-stopped
+
+  auth-api:
+    build: ./auth-api
+    ports:
+      - "8001:8001"
+    environment:
+      - DB_PATH=/data/auth.db
+    volumes:
+      - auth_data:/data
+    restart: unless-stopped
+
+  orders-api:
+    build: ./orders-api
+    ports:
+      - "8002:8002"
+    environment:
+      - DB_PATH=/data/orders.db
+    volumes:
+      - orders_data:/data
+    restart: unless-stopped
+
+  products-api:
+    build: ./products-api
+    ports:
+      - "8003:8003"
+    environment:
+      - DB_PATH=/data/products.db
+    volumes:
+      - products_data:/data
+    restart: unless-stopped
+
+volumes:
+  users_data:
+  auth_data:
+  orders_data:
+  products_data:
